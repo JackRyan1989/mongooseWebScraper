@@ -5,12 +5,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 //Call in the app defined in server.js
-module.exports = function(app) {
-    app.get('/', function(req, res){
-        res.render('index');
+module.exports = function (app) {
+    app.get('/', function (req, res) {
+        try {
+            res.render('index');
+        } catch (error) {
+            res.status(401).json(error);
+        }
     });
-
-
-
 
 };

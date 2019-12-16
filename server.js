@@ -3,7 +3,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
-const mongoose = requrie('mongoose');
+const mongoose = require('mongoose');
 //Call in Axios to do our gets and such:
 const axios = require('axios');
 //Cheerio, the thing that will do the scraping:
@@ -24,31 +24,29 @@ app.use(express.static("public"));
 //Define our port:
 const PORT = process.env.PORT || 3000;
 
-//Set up our mongoose connection:
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-mongoose.connect(MONGODB_URI);
 
 //Set up handlebars templating:
 app.engine(
-    "handlebars",
+  "handlebars",
 
-    exphbs({
-        defaultLayout: 'main',
-        extname: 'hbs'
-    })
+  exphbs({
+    defaultLayout: 'main'
+  })
 );
-app.set('view engine', 'hbs');
+app.set('view engine', 'handlebars');
 
+//Set up our mongoose connection:
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 //Call our routes: 
 require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
+//require('./routes/htmlRoutes')(app);
 
 //Listen to our port:
 app.listen(PORT, function () {
-    console.log(
-      `==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
-    );
-  });
+  console.log(
+    `==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
+  );
+});
 
-  module.exports = app;
+module.exports = app;
