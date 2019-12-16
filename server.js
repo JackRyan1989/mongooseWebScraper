@@ -24,6 +24,11 @@ app.use(express.static("public"));
 //Define our port:
 const PORT = process.env.PORT || 3000;
 
+//Set up our mongoose connection:
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 //Set up handlebars templating:
 app.engine(
     "handlebars",
@@ -42,8 +47,8 @@ require('./routes/htmlRoutes')(app);
 //Listen to our port:
 app.listen(PORT, function () {
     console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
+      `==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`
     );
   });
+
+  module.exports = app;
