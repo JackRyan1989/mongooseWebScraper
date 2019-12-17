@@ -17,7 +17,6 @@ module.exports = function (app) {
                 let articles = {
                     article: dbArticles
                 }
-                console.log(articles);
                 res.render('index', articles);
             })
             .catch(function (error) {
@@ -29,7 +28,7 @@ module.exports = function (app) {
     //This path does this:
     app.get('/article/:id', function(req,res){
         db.Article.findOne({_id: req.params.id})
-        .populate('note')
+        .populate('comment')
         .then(function(dbArticle){
             //Just return something:
             res.json(dbArticle);
@@ -69,13 +68,14 @@ module.exports = function (app) {
     app.post('/article/:id', function (req, res) {
         db.Comment.create(req.body)
             .then(function (dbComment) {
-                return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
-            })
-            .then(function (dbArticle) {
-                let articles = {
-                    article: dbArticle
-                }
-                res.render('index', articles);
+               return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
+            }).then(function(dbArticles){
+                db.Comment.find({_id: dbArticles.comment}).then(function(output){
+                    let comments = {
+                        comment: output
+                    }
+                    res.render('index', comments);
+                })
             })
             .catch(function (err) {
                 res.json(err);

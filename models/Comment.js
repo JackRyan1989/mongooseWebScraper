@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     body: {
-        type:  String,
-        required: [true, 'Why no words?'] 
+        type:  String
     },
     user: {
-        type:  String,
-        required: [true, 'Why so shy?']
+        type:  String
     }
 });
 
