@@ -3,8 +3,6 @@ const db = require('../models');
 const axios = require('axios');
 //Cheerio, the thing that will do the scraping:
 const cheerio = require('cheerio');
-//Trim the whitespace from the front of the title:
-//const strTrim = require('../public/js/strTrim');
 
 //Call in the app defined in server.js
 module.exports = function (app) {
