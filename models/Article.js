@@ -6,13 +6,13 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    author: {
-        type: String,
-        required: true
-    },
     link: {
         type: String,
         required: true
+    },
+    likes: {
+        type: Number,
+        default: 0
     },
     //Need to link the comments to our article, hence code below:
     comment: {
