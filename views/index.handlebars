@@ -20,31 +20,16 @@
                         <button class='btn btn-sm commBtn' id={{this.id}}>Comment</button>
                         <div class='comments' id={{this.id}}>
                         </div>
-                        {{#comment}}
+                        {{#if comment}}
+                        {{#each comment}}
                         <div class="comment">{{this.user}} said {{this.body}}</div>
-                        {{/comment}}
+                        {{/each}}
+                        {{/if}}
                     </div>
                 </div>
-                {{!-- <div class='row p-2'>
-                    <div class='card-text col-2 votes'>
-                        {{this.likes}} people like this story.
-                    </div>
-                    <div class='col-1'>
-                        <button class='btn' id='up'>Liked</button>
-                    </div>
-                    <div class='col-1'>
-                        <button class='btn' id='down'>Disliked</button>
-                    </div>
-                </div> --}}
             </div>
             {{/article}}
 
         </div>
     </div>
-
-    {{!-- <footer>
-        <div class="container footer">
-            <span class="text-muted my-3">Made by Jack Ryan 2019</span>
-        </div>
-    </footer> --}}
 </div>

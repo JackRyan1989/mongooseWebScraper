@@ -68,12 +68,7 @@ module.exports = function (app) {
             .then(function (dbComment) {
                return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
             }).then(function(dbArticles){
-                db.Comment.find({_id: dbArticles.comment}).then(function(output){
-                    let comments = {
-                        comment: output
-                    }
-                    res.render('index', comments);
-                })
+                res.json(dbArticles);
             })
             .catch(function (err) {
                 res.json(err);
