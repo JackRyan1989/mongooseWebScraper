@@ -44,7 +44,7 @@ module.exports = function (app) {
                     })
             })
         })
-        res.send('Done scrapin\'');
+        res.redirect('/');
     })
 
     //-------------- COMMENT EDITING --------------
