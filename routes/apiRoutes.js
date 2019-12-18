@@ -52,8 +52,6 @@ module.exports = function (app) {
                 //Create the article in the database:
                 db.Article.create(result)
                     .then(function (dbArticle) {
-                        console.log(dbArticle);
-                        //res.render('index', dbArticle);
                     }).catch(function (error) {
                         res.status(401).json(error);
                     })
@@ -74,5 +72,7 @@ module.exports = function (app) {
                 res.json(err);
             })
     });
+
+    //Add save and delete routes:
 
 }

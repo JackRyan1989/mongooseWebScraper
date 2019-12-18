@@ -23,6 +23,7 @@
                         {{#if comment}}
                         {{#each comment}}
                         <div class="comment">{{this.user}} said {{this.body}}</div>
+                        <button class='btn btn-sm deleteBtn' id={{this.id}}>Delete</button>
                         {{/each}}
                         {{/if}}
                     </div>
