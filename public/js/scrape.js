@@ -43,6 +43,7 @@ $(document).ready(function () {
             location.reload();
         })
     })
+    
     //Delete comment:
     $(document).on('click', '.deleteBtn', function(){
         let deleteId = $(this).attr('data-id');

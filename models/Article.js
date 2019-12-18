@@ -10,9 +10,8 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    likes: {
-        type: Number,
-        default: 0
+    summary: {
+        type: String
     },
     //Need to link the comments to our article, hence code below:
     comment: [

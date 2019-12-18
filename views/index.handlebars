@@ -13,6 +13,7 @@
             <div class='card'>
                 <div class="card-body p-2">
                     <h4 class="card-title"><a href={{this.link}}>{{this.title}}</a></h4>
+                    <span class="card-text summary">{{this.summary}}</span>
                 </div>
                 <div class="row p-2">
                     <div class='card-text col-12 my-2'>
@@ -25,7 +26,7 @@
                     {{#each comment}}
                     <div class='my-3 card-text col-12 putCommentsHere'>
                         {{this.user}} said {{this.body}}
-                        <button class="btn btn-sm btn-danger m-2 deleteBtn" data-id={{this}}>Delete Comment</button>
+                        <button class="btn btn-sm btn-danger m-2 deleteBtn" data-id={{this.id}}>Delete Comment</button>
                     </div>
                     {{/each}}
                     {{/if}}

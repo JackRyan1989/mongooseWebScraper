@@ -11,8 +11,8 @@ module.exports = function (app) {
     //Just get and display the homepage with articles:
     app.get('/', function (req, res) {
         db.Article.find({})
+            .populate('comment')
             .then(function (dbArticles) {
-                console.log(dbArticles);
                 let articles = {
                     article: dbArticles
                 }
@@ -28,14 +28,14 @@ module.exports = function (app) {
         axios.get('https://billypenn.com/categories/news/').then(function (response) {
             //Use cheerio to parse the html from Billy Penn:
             let $ = cheerio.load(response.data);
-            $("article h1").each(function (i, element) {
+            $("article").each(function (i, element) {
                 //Create an object to store our title and link in:
                 const result = {};
 
                 //Populate the text and link from the Billy Penn site to the empty result object:
-                result.title = $(this).children('a').text().trim();
-                result.link = $(this).children('a').attr('href');
-
+                result.title = $(this).children('div').children('h1').children('a').text().trim();
+                result.summary = $(this).children('div').children('div').text().trim();
+                result.link = $(this).children('div').children('h1').children('a').attr('href');
                 //Create the article in the database:
                 db.Article.create(result)
                     .then(function (dbArticle) {
@@ -52,7 +52,6 @@ module.exports = function (app) {
     //This path does this:
     app.get('/article/:id', function(req,res){
         db.Article.findOne({_id: req.params.id})
-        .populate('comment')
         .then(function(dbArticle){
             //Just return something:
             res.json(dbArticle);
@@ -77,9 +76,9 @@ module.exports = function (app) {
 
     //Add save and delete
     app.get('/delete/:id', function(req, res){
-        db.Comment.findOneAndDelete({_id: req.params.id})
+        db.Comment.findOneAndRemove({_id: req.params.id})
         .then(function(output){
-            res.json(output);
+            res.redirect('/');
         })
         .catch(function (err) {
             res.json(err);
