@@ -15,18 +15,20 @@
                     <h4 class="card-title"><a href={{this.link}}>{{this.title}}</a></h4>
                 </div>
                 <div class="row p-2">
-                    <div class='card-text col-12'>
+                    <div class='card-text col-12 my-2'>
                         <h5>Banter</h5>
-                        <button class='btn btn-sm commBtn' id={{this.id}}>Comment</button>
+                        <button class='btn btn-sm btn-primary commBtn my-2' id={{this.id}}>Comment</button>
                         <div class='comments' id={{this.id}}>
                         </div>
-                        {{#if comment}}
-                        {{#each comment}}
-                        <div class="comment">{{this.user}} said {{this.body}}</div>
-                        <button class='btn btn-sm deleteBtn' id={{this.id}}>Delete</button>
-                        {{/each}}
-                        {{/if}}
                     </div>
+                    {{#if comment}}
+                    {{#each comment}}
+                    <div class='my-3 card-text col-12 putCommentsHere'>
+                        {{this.user}} said {{this.body}}
+                        <button class="btn btn-sm btn-danger m-2 deleteBtn" data-id={{this}}>Delete Comment</button>
+                    </div>
+                    {{/each}}
+                    {{/if}}
                 </div>
             </div>
             {{/article}}

@@ -15,10 +15,12 @@ const ArticleSchema = new Schema({
         default: 0
     },
     //Need to link the comments to our article, hence code below:
-    comment: {
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }
+    comment: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
 });
 
 const Article = mongoose.model('Article', ArticleSchema);

@@ -12,6 +12,7 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         db.Article.find({})
             .then(function (dbArticles) {
+                console.log(dbArticles);
                 let articles = {
                     article: dbArticles
                 }
@@ -21,21 +22,7 @@ module.exports = function (app) {
                 res.status(401).json(error);
             })
     });
-
-    //When we want to comment, you need to grab the specific article you would like to comment on
-    //This path does this:
-    app.get('/article/:id', function(req,res){
-        db.Article.findOne({_id: req.params.id})
-        .populate('comment')
-        .then(function(dbArticle){
-            //Just return something:
-            res.json(dbArticle);
-        })
-        .catch(function (error) {
-            res.status(401).json(error);
-        })
-    })
-
+    
     //Do the web scrapin' of Billy Penn, for Articles::
     app.get('/scrape', function (req, res) {
         axios.get('https://billypenn.com/categories/news/').then(function (response) {
@@ -60,11 +47,26 @@ module.exports = function (app) {
         res.send('Done scrapin\'');
     })
 
+    //-------------- COMMENT EDITING --------------
+    //When we want to comment, you need to grab the specific article you would like to comment on
+    //This path does this:
+    app.get('/article/:id', function(req,res){
+        db.Article.findOne({_id: req.params.id})
+        .populate('comment')
+        .then(function(dbArticle){
+            //Just return something:
+            res.json(dbArticle);
+        })
+        .catch(function (error) {
+            res.status(401).json(error);
+        })
+    })
+
     //Post comment to article:
     app.post('/article/:id', function (req, res) {
         db.Comment.create(req.body)
             .then(function (dbComment) {
-               return db.Article.findOneAndUpdate({ _id: req.params.id }, { comment: dbComment._id }, { new: true });
+               return db.Article.findOneAndUpdate({_id: req.params.id}, { $push: { comment: dbComment._id } } , { new: true });
             }).then(function(dbArticles){
                 res.json(dbArticles);
             })
@@ -73,6 +75,14 @@ module.exports = function (app) {
             })
     });
 
-    //Add save and delete routes:
-
+    //Add save and delete
+    app.get('/delete/:id', function(req, res){
+        db.Comment.findOneAndDelete({_id: req.params.id})
+        .then(function(output){
+            res.json(output);
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
+    })
 }

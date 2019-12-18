@@ -37,7 +37,7 @@ app.set('view engine', 'handlebars');
 
 //Set up our mongoose connection:
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 //Call our routes: 
 require('./routes/apiRoutes')(app);
 //require('./routes/htmlRoutes')(app);
