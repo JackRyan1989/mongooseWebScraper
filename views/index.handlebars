@@ -1,35 +1,34 @@
-<div class="container">
-    <div class="row jumbo col-lg-12 d-block">
-        <div class="jumbotron">
-            <h1 class='mainHeading'></h1>
-            <h1 class='mainHeading'>Locals Only</h1>
-            <h2 class='subHeading'>Comment on Local Doings and Happenings</h2>
+<div class="container col-12 d-block">
+    <div class="row jumbo col-12 d-block mx-auto">
+        <div class="jumbotron rounded-0 w-100">
+            <h1 class='mainHeading text-white'>Locals Only</h1>
+            <h2 class='subHeading text-white'>Commentary on Local Doins' and Happenins'</h2>
         </div>
     </div>
-    <div class="row mainContent d-block">
-        <div class="col-8 articles">
-            <h3>Latest Doins'</h3>
+    <div class="row mainContent">
+        <div class="col-12 articles">
+            <h3 class="text-white">Latest Doins'</h3>
             {{#article}}
-            <div class='card'>
+            <div class='card shadow-lg p-3 my-3 border-0 rounded-0'>
                 <div class="card-body p-2">
                     <h4 class="card-title"><a href={{this.link}}>{{this.title}}</a></h4>
                     <span class="card-text summary">{{this.summary}}</span>
                 </div>
                 <div class="row p-2">
                     <div class='card-text col-12 my-2'>
-                        <h5>Banter</h5>
-                        <button class='btn btn-sm btn-primary commBtn my-2' id={{this.id}}>Comment</button>
+                        <h5 class='border-bottom'>Banter</h5>
+                        <button class='btn btn-sm btn-primary commBtn my-2' id={{this.id}}> New Comment</button>
                         <div class='comments' id={{this.id}}>
                         </div>
-                    </div>
                     {{#if comment}}
                     {{#each comment}}
-                    <div class='my-3 card-text col-12 putCommentsHere'>
-                        {{this.user}} said {{this.body}}
+                    <div class='my-3 card-text col-6 putCommentsHere'>
+                        <div class='commentDiv border-bottom'><span class='user p-2'>{{this.user}}</span> said: <span class='comment p-2'>{{this.body}}</span></div>
                         <button class="btn btn-sm btn-danger m-2 deleteBtn" data-id={{this.id}}>Delete Comment</button>
                     </div>
                     {{/each}}
                     {{/if}}
+                    </div>
                 </div>
             </div>
             {{/article}}

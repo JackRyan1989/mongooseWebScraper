@@ -1,13 +1,31 @@
 body {
-    background-color: whitesmoke;
+  background-color: #002d72;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    height: 50px;
-    width: 100%;
-    font-size: 12px;
-    background-color: lightgray;
-    margin: 0;
+.jumbotron {
+  background-color: #e81828;
+  font-family: "Inria Serif", serif;
 }
+
+h3,
+.card,
+.card-text {
+    font-family: 'Lato', sans-serif;
+}
+
+.card-title {
+    font-size: 36px;
+}
+
+h5 {
+    font-size: 32px;
+}
+
+.user {
+    font-size: 24px;
+}
+
+.comment {
+    font-size: 24px;
+}
+
